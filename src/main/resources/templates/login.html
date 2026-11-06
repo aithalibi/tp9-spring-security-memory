@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Connexion - Application securisee</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="login-wrapper">
+    <div class="login-boite">
+        <h2>Veuillez vous identifier</h2>
+        <p class="sous-titre">Authentification en memoire (TP 9)</p>
+
+        <div th:if="${param.error}" class="alerte alerte-erreur">
+            Identifiant ou mot de passe invalide.
+        </div>
+        <div th:if="${param.logout}" class="alerte alerte-succes">
+            Vous avez ete deconnecte avec succes.
+        </div>
+
+        <form th:action="@{/login}" method="post">
+            <div class="champ">
+                <label for="username">Nom d'utilisateur</label>
+                <input type="text" id="username" name="username" required autofocus
+                       autocomplete="username" placeholder="user ou admin">
+            </div>
+            <div class="champ">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" required
+                       autocomplete="current-password" placeholder="Mot de passe">
+            </div>
+            <button type="submit" class="bouton">Se connecter</button>
+        </form>
+
+        <p class="sous-titre" style="margin-top:20px;margin-bottom:0">
+            Comptes de demonstration : <code>user / 1111</code> &middot; <code>admin / 1234</code>
+        </p>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments :: head('Accueil')}"></head>
+<body>
+
+<header th:replace="~{fragments :: barre}"></header>
+
+<main class="conteneur">
+    <div class="carte">
+        <h1>Bienvenue sur l'application publique</h1>
+        <p class="intro">
+            Cette page est accessible sans authentification. Les deux espaces ci-dessous sont
+            proteges : Spring Security vous redirigera vers le formulaire de connexion.
+        </p>
+
+        <ul class="liste-liens">
+            <li><a th:href="@{/user/dashboard}">Espace Utilisateur (role USER)</a></li>
+            <li><a th:href="@{/admin/dashboard}">Espace Administrateur (role ADMIN)</a></li>
+        </ul>
+
+        <div class="alerte alerte-info" style="margin-top:26px" sec:authorize="isAnonymous()">
+            Vous n'etes pas connecte. Renseignez <code>user / 1111</code> ou
+            <code>admin / 1234</code> sur la page de connexion.
+        </div>
+
+        <div class="alerte alerte-succes" style="margin-top:26px" sec:authorize="isAuthenticated()">
+            Connecte en tant que <strong sec:authentication="name">utilisateur</strong>
+            avec les roles <strong sec:authentication="authorities">ROLE_USER</strong>.
+        </div>
+    </div>
+</main>
+
+<p class="pied">TP 9 &mdash; Authentification en memoire avec Spring Security</p>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments :: head('Espace administrateur')}"></head>
+<body>
+
+<header th:replace="~{fragments :: barre}"></header>
+
+<main class="conteneur">
+    <div class="carte">
+        <span class="badge badge-admin">Zone sensible</span>
+        <h1 style="margin-top:12px">Espace Administrateur</h1>
+        <p class="intro">
+            Cette page exige le role <code>ROLE_ADMIN</code>. Le compte <code>user</code> ne
+            possede que <code>ROLE_USER</code> : Spring Security lui refuse l'acces avec un
+            code HTTP 403 et le redirige vers la page d'acces refuse.
+        </p>
+
+        <table class="comptes">
+            <thead>
+            <tr>
+                <th>Information</th>
+                <th>Valeur</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Administrateur connecte</td>
+                <td sec:authentication="name">-</td>
+            </tr>
+            <tr>
+                <td>Roles accordes</td>
+                <td sec:authentication="authorities">-</td>
+            </tr>
+            <tr>
+                <td>Regle appliquee</td>
+                <td><code>requestMatchers("/admin/**").hasRole("ADMIN")</code></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <p style="margin-top:24px">
+            <a class="bouton" th:href="@{/}">Retour a l'accueil</a>
+        </p>
+    </div>
+</main>
+
+<p class="pied">TP 9 &mdash; Authentification en memoire avec Spring Security</p>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head(titre)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${titre} + ' - Application securisee'">Application securisee</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header class="entete" th:fragment="barre">
+    <span class="marque">MLIAEdu &middot; Spring Security</span>
+    <nav>
+        <a th:href="@{/}">Accueil</a>
+        <a th:href="@{/user/dashboard}">Espace utilisateur</a>
+        <a th:href="@{/admin/dashboard}">Espace admin</a>
+        <span sec:authorize="isAuthenticated()">
+            <a th:href="@{/profil}" sec:authentication="name">utilisateur</a>
+        </span>
+        <form th:action="@{/logout}" method="post" style="display:inline"
+              sec:authorize="isAuthenticated()">
+            <button type="submit" class="bouton-discret" style="margin-left:18px">Deconnexion</button>
+        </form>
+    </nav>
+</header>
+
+</body>
+</html>
